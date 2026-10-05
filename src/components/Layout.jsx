@@ -12,6 +12,7 @@ import { BOOKING_URL } from "../data/contact";
 export default function Layout({ accentColor, motion = "full", showMascot = true }) {
   const rootRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mascotVisible, setMascotVisible] = useState(true);
   const location = useLocation();
 
   useEffect(() => setMenuOpen(false), [location.pathname, location.hash]);
@@ -78,25 +79,27 @@ export default function Layout({ accentColor, motion = "full", showMascot = true
         <Outlet />
       </main>
 
-      <div data-ax-bot="" style={{ position: "fixed", right: "clamp(14px, 2vw, 28px)", bottom: "clamp(14px, 2vw, 28px)", zIndex: "55", display: "flex", alignItems: "flex-end", gap: "10px" }}>
-        <div className="site-bot-bubble" data-ax-bot-bubble="" style={{ maxWidth: "226px", background: "#0A0C10", color: "#F6F5F2", padding: "14px 16px", borderRadius: "14px", borderBottomRightRadius: "4px", boxShadow: "0 14px 34px rgba(10,12,16,0.24)", opacity: "0", transform: "translateY(8px) scale(0.96)", transition: "opacity 400ms ease, transform 400ms cubic-bezier(0.22,1,0.36,1)" }}>
-          <p style={{ fontSize: "13px", lineHeight: "1.5" }}>Hi, I'm Adi. Want a 30-minute read on where AI actually pays off for you?</p>
-          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" data-ax-accent-fg="" style={{ display: "inline-block", marginTop: "10px", fontFamily: "'IBM Plex Mono', monospace", fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(0.74 0.13 195)" }}>Book a call →</a>
-        </div>
-        <div data-ax-bot-body="" style={{ position: "relative", display: "block", width: "76px", height: "98px", animation: "ax-float 4.2s ease-in-out infinite" }}>
-          <button data-ax-bot-close="" aria-label="Hide assistant" style={{ position: "absolute", right: "-4px", top: "12px", width: "22px", height: "22px", borderRadius: "50%", border: "1px solid rgba(10,12,16,0.25)", background: "#F6F5F2", color: "#0A0C10", fontSize: "12px", lineHeight: "1", cursor: "pointer", zIndex: "2", padding: "0", display: "flex", alignItems: "center", justifyContent: "center" }} data-hover="background: #E4E2DC;">×</button>
-          <span style={{ position: "absolute", left: "50%", top: "2px", width: "2px", height: "13px", marginLeft: "-1px", background: "#F6F5F2", display: "block" }}></span>
-          <span data-ax-accent-bg="" style={{ position: "absolute", left: "50%", top: "-5px", width: "10px", height: "10px", marginLeft: "-5px", borderRadius: "50%", background: "oklch(0.74 0.13 195)", display: "block", animation: "ax-ping 2.8s ease-out infinite" }}></span>
-          <span data-ax-accent-bg="" style={{ position: "absolute", left: "50%", top: "-5px", width: "10px", height: "10px", marginLeft: "-5px", borderRadius: "50%", background: "oklch(0.74 0.13 195)", display: "block" }}></span>
-          <span style={{ position: "absolute", left: "3px", top: "15px", width: "70px", height: "50px", borderRadius: "18px", background: "#F6F5F2", border: "1px solid rgba(10,12,16,0.18)", boxShadow: "0 8px 22px rgba(0,0,0,0.28)", display: "block" }}></span>
-          <span style={{ position: "absolute", left: "12px", top: "26px", width: "50px", height: "26px", borderRadius: "12px", background: "#0A0C10", display: "block" }}></span>
-          <span style={{ position: "absolute", left: "22px", top: "34px", width: "11px", height: "11px", borderRadius: "50%", background: "#F6F5F2", display: "block", animation: "ax-eye 5.4s ease-in-out infinite" }}></span>
-          <span style={{ position: "absolute", left: "43px", top: "34px", width: "11px", height: "11px", borderRadius: "50%", background: "#F6F5F2", display: "block", animation: "ax-eye 5.4s ease-in-out infinite" }}></span>
-          <span style={{ position: "absolute", left: "14px", top: "69px", width: "48px", height: "29px", borderRadius: "12px", background: "#F6F5F2", border: "1px solid rgba(10,12,16,0.18)", boxShadow: "0 8px 22px rgba(0,0,0,0.28)", display: "block" }}></span>
-          <span data-ax-accent-bg="" style={{ position: "absolute", left: "30px", top: "80px", width: "16px", height: "4px", borderRadius: "2px", background: "oklch(0.74 0.13 195)", display: "block" }}></span>
-          <span style={{ position: "absolute", left: "62px", top: "66px", width: "8px", height: "26px", borderRadius: "4px", background: "#F6F5F2", boxShadow: "0 4px 12px rgba(0,0,0,0.25)", display: "block", transformOrigin: "50% 88%", animation: "ax-wave 1.9s ease-in-out infinite" }}></span>
-          <span style={{ position: "absolute", left: "5px", top: "72px", width: "8px", height: "22px", borderRadius: "4px", background: "#F6F5F2", boxShadow: "0 4px 12px rgba(0,0,0,0.25)", display: "block" }}></span>
-        </div>
+      <div data-ax-bot="" style={{ position: "fixed", right: "clamp(14px, 2vw, 28px)", bottom: "clamp(14px, 2vw, 28px)", zIndex: "55", display: mascotVisible && showMascot ? "flex" : "none", alignItems: "flex-end", gap: "10px" }}>
+        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" aria-label="Book a 30-minute call" style={{ display: "block", color: "inherit", textDecoration: "none", borderRadius: "12px", outlineOffset: "4px" }}>
+          <div data-ax-bot-body="" aria-hidden="true" style={{ position: "relative", display: "block", width: "118px", height: "128px", animation: "ax-float 4.2s ease-in-out infinite" }}>
+            <span style={{ position: "absolute", left: "50%", top: "1px", width: "2px", height: "12px", marginLeft: "-1px", background: "#F6F5F2", display: "block" }}></span>
+            <span data-ax-accent-bg="" style={{ position: "absolute", left: "50%", top: "-6px", width: "10px", height: "10px", marginLeft: "-5px", borderRadius: "50%", background: "oklch(0.74 0.13 195)", display: "block", animation: "ax-ping 2.8s ease-out infinite" }}></span>
+            <div style={{ position: "absolute", inset: "0", transformOrigin: "83px 108px", animation: "ax-wave 4.8s ease-in-out infinite" }}>
+              <span style={{ position: "absolute", left: "79px", top: "58px", width: "8px", height: "50px", borderRadius: "4px", background: "#F6F5F2", boxShadow: "0 4px 12px rgba(0,0,0,0.25)", display: "block", transform: "rotate(24deg)", transformOrigin: "50% 100%" }}></span>
+              <span style={{ position: "absolute", left: "102px", top: "9px", width: "3px", height: "57px", borderRadius: "2px", background: "#F6F5F2", boxShadow: "0 3px 8px rgba(0,0,0,0.2)", display: "block" }}></span>
+              <span data-ax-accent-bg="" style={{ position: "absolute", left: "8px", top: "10px", width: "96px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center", background: "oklch(0.74 0.13 195)", color: "#0A0C10", border: "2px solid #F6F5F2", borderRadius: "4px 4px 9px 4px", boxShadow: "0 6px 16px rgba(0,0,0,0.28)", fontFamily: "'IBM Plex Mono', monospace", fontSize: "9px", fontWeight: "700", letterSpacing: "0.04em", whiteSpace: "nowrap" }}>BOOK A CALL <span style={{ marginLeft: "4px" }}>↗</span></span>
+              <span style={{ position: "absolute", left: "96px", top: "54px", width: "15px", height: "16px", borderRadius: "7px", background: "#F6F5F2", border: "1px solid rgba(10,12,16,0.18)", boxShadow: "0 3px 8px rgba(0,0,0,0.2)", display: "block" }}></span>
+            </div>
+            <span style={{ position: "absolute", left: "24px", top: "46px", width: "70px", height: "50px", borderRadius: "18px", background: "#F6F5F2", border: "1px solid rgba(10,12,16,0.18)", boxShadow: "0 8px 22px rgba(0,0,0,0.28)", display: "block" }}></span>
+            <span style={{ position: "absolute", left: "33px", top: "57px", width: "50px", height: "26px", borderRadius: "12px", background: "#0A0C10", display: "block" }}></span>
+            <span style={{ position: "absolute", left: "43px", top: "65px", width: "11px", height: "11px", borderRadius: "50%", background: "#F6F5F2", display: "block", animation: "ax-eye 5.4s ease-in-out infinite" }}></span>
+            <span style={{ position: "absolute", left: "64px", top: "65px", width: "11px", height: "11px", borderRadius: "50%", background: "#F6F5F2", display: "block", animation: "ax-eye 5.4s ease-in-out infinite" }}></span>
+            <span style={{ position: "absolute", left: "35px", top: "100px", width: "48px", height: "28px", borderRadius: "12px", background: "#F6F5F2", border: "1px solid rgba(10,12,16,0.18)", boxShadow: "0 8px 22px rgba(0,0,0,0.28)", display: "block" }}></span>
+            <span data-ax-accent-bg="" style={{ position: "absolute", left: "52px", top: "111px", width: "16px", height: "4px", borderRadius: "2px", background: "oklch(0.74 0.13 195)", display: "block" }}></span>
+            <span style={{ position: "absolute", left: "26px", top: "100px", width: "8px", height: "24px", borderRadius: "4px", background: "#F6F5F2", boxShadow: "0 4px 12px rgba(0,0,0,0.25)", display: "block" }}></span>
+          </div>
+        </a>
+        <button type="button" onClick={() => setMascotVisible(false)} aria-label="Hide booking mascot" style={{ position: "absolute", top: "-8px", right: "-6px", width: "22px", height: "22px", padding: "0", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(10,12,16,0.3)", borderRadius: "50%", background: "#F6F5F2", color: "#0A0C10", fontSize: "15px", lineHeight: "1", cursor: "pointer", boxShadow: "0 3px 8px rgba(0,0,0,0.2)" }}><span aria-hidden="true">×</span></button>
       </div>
     </div>
   );

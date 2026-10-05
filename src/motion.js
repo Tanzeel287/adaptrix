@@ -91,30 +91,6 @@ export default class SiteMotion {
     const bot = this.root.querySelector('[data-ax-bot]');
     if (!bot) return;
     if (this.props.showMascot === false) { bot.style.display = 'none'; return; }
-    const bubble = bot.querySelector('[data-ax-bot-bubble]');
-    const show = (on) => {
-      if (!bubble) return;
-      bubble.style.opacity = on ? '1' : '0';
-      bubble.style.transform = on ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.96)';
-    };
-    this.botTimers = [
-      setTimeout(() => show(true), 2200),
-      setTimeout(() => show(false), 9000)
-    ];
-    bot.addEventListener('mouseenter', () => show(true));
-    bot.addEventListener('mouseleave', () => show(false));
-    const close = bot.querySelector('[data-ax-bot-close]');
-    if (close) {
-      close.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        (this.botTimers || []).forEach(clearTimeout);
-        bot.style.transition = 'opacity 250ms ease, transform 250ms ease';
-        bot.style.opacity = '0';
-        bot.style.transform = 'translateY(12px) scale(0.9)';
-        setTimeout(() => { bot.style.display = 'none'; }, 260);
-      });
-    }
   }
 
   setupFaq() {
